@@ -396,7 +396,8 @@ namespace RocksmithToTab
             // occur in song names or similar, anyway
             var invalidChars = Path.GetInvalidFileNameChars().Where(x => x != Path.DirectorySeparatorChar);
             var cleaned = fileName.Where(x => !invalidChars.Contains(x)).ToArray();
-            return new string(cleaned);
+            var noSlashes = cleaned.Select(s => s == '/' ? '_' : s).ToArray();
+            return new string(noSlashes);
         }
 
     }
